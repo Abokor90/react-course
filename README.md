@@ -136,49 +136,55 @@ function ProfileCard({ name, age, job, city }) {
 - Read the error message before changing code.
 - Check that names match exactly: file name, `export`, `import`, and tag.
 
-## 4. Events
+### 4. Events
 
 Exercise: an EventPlayground component with a hover box, a click logger, and an input logger (src/04-events/practice/EventPlayground.jsx).
 
 An event is something the user does (click, typing, hovering). In React you attach a handler by passing a function to an event prop on an element.
 Event props are camelCase (onClick, not onclick) and take a function, not a string.
-Prop Fires when Useful data
-onClick An element is clicked event.target.textContent
-onChange An input's value changes event.target.value (all the text so far)
-onKeyDown A key is pressed event.key (which key)
-onMouseEnter / onMouseLeave The mouse moves onto / off an element
-React calls your handler for you and passes it an event object. Add a parameter (event or e) to receive it.
-Never call the handler yourself in JSX: onClick={handleClick}, not onClick={handleClick()}.
-Events and props go on the existing element. They are attributes, not new elements, so the one-root-element rule isn't affected.
-Handlers that set a fixed value
+
+onClick - An element is clicked event.target.textContent
+onChange - An input's value changes event.target.value (all the text so far)
+onKeyDown - A key is pressed event.key (which key)
+onMouseEnter / onMouseLeave - The mouse moves onto / off an element
+
+- React calls your handler for you and passes it an event object. Add a parameter (event or e) to receive it.
+- Never call the handler yourself in JSX: onClick={handleClick}, not onClick={handleClick()}.
+- Events and props go on the existing element. They are attributes, not new elements, so the one-root-element rule isn't affected.
+
+  ## Handlers that set a fixed value
 
 Some events record a fact, so the handler sets a fixed value instead of flipping the old one:
 
-jsx
+```javascript
 const [isHovered, setIsHovered] = useState(false);
 
 // Entering always means "hovered", whatever the old value was
 function handleMouseEnter() {
-setIsHovered(true);
+  setIsHovered(true);
 }
 
 // Leaving always means "not hovered"
 function handleMouseLeave() {
-setIsHovered(false);
+  setIsHovered(false);
 }
 
 // The JSX shows different things depending on state
 
 <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-  {isHovered ? "Hovered" : "Not hovered"}
-</div>
-Use !value to flip only for real toggles (like a Paid/Unpaid button).
-Don't edit the page by hand (innerHTML) or store results on the event object. Change state, and the JSX shows the result.
-style takes an object, so it uses double braces: style={{ backgroundColor: "lightgray" }}. CSS names are camelCase.
-Inputs keep their own text
+  {isHovered ? 'Hovered' : 'Not hovered'}
+</div>;
+```
+
+- Use !value to flip only for real toggles (like a Paid/Unpaid button).
+- Don't edit the page by hand (innerHTML) or store results on the event object. Change state, and the JSX shows the result.
+- style takes an object, so it uses double braces: style={{ backgroundColor: "lightgray" }}. CSS names are camelCase.
+
+# Inputs keep their own text
 
 A plain <input> stores what you type itself, which is why the text appears even though no state was set. onChange only listens to it. Making React own that text is called a controlled input (next lesson).
 
-Naming habits
+# Naming habits
+
 Name handlers after their event: handleKeyDown, handleChange, handleMouseEnter.
 State and setter names should match: isHovered and setIsHovered.
