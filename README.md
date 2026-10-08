@@ -141,10 +141,13 @@ function ProfileCard({ name, age, job, city }) {
 An event is something the user does (click, typing, hovering). In React you attach a handler by passing a function to an event prop on an element.
 Event props are camelCase (onClick, not onclick) and take a function, not a string.
 
-onClick - An element is clicked event.target.textContent
-onChange - An input's value changes event.target.value (all the text so far)
-onKeyDown - A key is pressed event.key (which key)
-onMouseEnter / onMouseLeave - The mouse moves onto / off an element
+- onClick - An element is clicked event.target.textContent
+
+- onChange - An input's value changes event.target.value (all the text so far)
+
+- onKeyDown - A key is pressed event.key (which key)
+
+- onMouseEnter / onMouseLeave - The mouse moves onto / off an element
 
 - React calls your handler for you and passes it an event object. Add a parameter (event or e) to receive it.
 - Never call the handler yourself in JSX: onClick={handleClick}, not onClick={handleClick()}.
