@@ -143,9 +143,10 @@ Event props are camelCase (onClick, not onclick) and take a function, not a stri
 
 Prop	Fires when	Useful data
 onClick	An element is clicked	event.target.textContent
-onChange	An input's value changes	event.target.value (all the text so far)
-onKeyDown	A key is pressed	event.key (which key)
-onMouseEnter / onMouseLeave	The mouse moves onto / off an element	
+onChange	An input's value changes	event.target.value — all the text so far
+onKeyDown	A key is pressed	event.key — which key
+onMouseEnter	The mouse moves onto an element	—
+onMouseLeave	The mouse moves off an element	—
 
 - React calls your handler for you and passes it an event object. Add a parameter (event or e) to receive it.
 - Never call the handler yourself in JSX: onClick={handleClick}, not onClick={handleClick()}.
