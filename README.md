@@ -25,7 +25,7 @@ The exercises live here. The concepts are then applied in my main project, the *
 | --- | ----------------------------------------- | ----------------- | ----------- |
 | 1   | Components + JSX                          | Essential         | Done        |
 | 2   | Props                                     | Essential         | Done        |
-| 3   | State (`useState`)                        | Essential         | In progress |
+| 3   | State (`useState`)                        | Essential         | Done |
 | 4   | Events                                    | Essential         |             |
 | 5   | Forms + controlled inputs                 | Essential         |             |
 | 6   | Lists + keys                              | Essential         |             |
