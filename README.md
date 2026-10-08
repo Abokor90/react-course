@@ -138,8 +138,6 @@ function ProfileCard({ name, age, job, city }) {
 
 ### 4. Events
 
-Exercise: an EventPlayground component with a hover box, a click logger, and an input logger (src/04-events/practice/EventPlayground.jsx).
-
 An event is something the user does (click, typing, hovering). In React you attach a handler by passing a function to an event prop on an element.
 Event props are camelCase (onClick, not onclick) and take a function, not a string.
 
