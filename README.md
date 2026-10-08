@@ -67,8 +67,6 @@ Each topic gets its own numbered folder. `App.jsx` imports whichever exercise I'
 
 ### 1. Components + JSX
 
-**Exercise:** a `ProfileCard` component rendered multiple times.
-
 - A component is a function that returns JSX. Its name **must start with a capital letter**, because React uses the first letter to tell components (`<ProfileCard />`) from HTML tags (`<div>`).
 - Use components **like tags**, never like function calls: `<ProfileCard />`, not `ProfileCard()`.
 - JSX rules:
@@ -96,8 +94,6 @@ export default ProfileCard;
 ```
 
 ### 2. Props
-
-**Exercise:** `ProfileCard` receiving `name`, `age`, `job`, and `city`, rendered four times with different data.
 
 - Props pass data from parent to child. They are **read-only**, and data flows one way (parent to child).
 - Destructure props in the parameter list: `function ProfileCard({ name, age, job, city })`.
