@@ -184,6 +184,7 @@ A plain <input> stores what you type itself, which is why the text appears even 
 # Naming habits
 
 Name handlers after their event: handleKeyDown, handleChange, handleMouseEnter.
+
 State and setter names should match: isHovered and setIsHovered.
 
 ### 5. Forms + Controlled Inputs
@@ -191,6 +192,7 @@ State and setter names should match: isHovered and setIsHovered.
 ## Controlled inputs
 
 - A plain <input> keeps its own text (the browser owns it). A controlled input is one where React state owns the text.
+
 - Two props always go together: value (what to display, from state) and onChange (updates the state).
 
 ```javascript
@@ -205,20 +207,19 @@ function handleNameChange(event) {
 ```
 
 - Flow on every keystroke: type → onChange runs → setter updates state → React redraws → the input shows the new value.
+
 - value without onChange makes the input stuck (React forces it back to the state value, and warns in the console).
+
 - Because React knows the text, you can use it anywhere (live previews, character counts like name.length).
+
 - Start text state as "" (not undefined) so the input is controlled from the first render.
 
 ## Input values are always strings
 
-1. evClear the form: controlled inputs only change when state changes,
-   // so reset each state to its starting value.
-   setTitle("");
-   setAmount("");
-   setCategory("");
-   setDate("");
-   }ent.target.value is always a string, even for type="number". So amount + 1 with "5" gives "51", not 6.
+1. event.target.value is always a string, even for type="number". So amount + 1 with "5" gives "51", not 6.
+
 2. Convert when you calculate or save: Number(amount). For display, the string is fine.
+
 3. type="date" gives a string in YYYY-MM-DD format, the same format used for dates in the data.
 
 ## Select (dropdown)
@@ -235,7 +236,9 @@ function handleNameChange(event) {
 ## Submitting a form
 
 - Use a <form onSubmit={handleSubmit}> with a <button type="submit">. Pressing Enter in an input submits it too.
+
 - By default the browser reloads the page on submit, which wipes all React state. Call event.preventDefault() first in the handler.
+
 - Gather the state into one object, converting types where needed:
 
 ```javascript
@@ -258,4 +261,5 @@ function handleSubmit(event) {
 ## Habits
 
 - One state variable and one handler per field, with the handler named after its event (handleTitleChange).
+
 - State and setter names match (category and setCategory).
