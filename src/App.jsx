@@ -1,7 +1,8 @@
 // Import ProfileCard from the file you created.
-import ProfileCard from "./01-components-jsx/practice/ProfileCard";
-import Counter from "./03-state/practice/Counter";
-import EventPlayground from "./04-events/practice/EventPlayground";
+// import ProfileCard from "./01-components-jsx/practice/ProfileCard";
+// import Counter from "./03-state/practice/Counter";
+// import EventPlayground from "./04-events/practice/EventPlayground";
+import LivePreview from "./05-forms/practice/LivePreview";
 
 // App is the root component. main.jsx renders it to the page.
 function App() {
@@ -15,14 +16,16 @@ function App() {
       {/* <Counter />
       <Counter /> */}
 
+      {/* <EventPlayground />
       <EventPlayground />
-      <EventPlayground />
-      <EventPlayground />
+      <EventPlayground /> */}
+
+      <LivePreview />
+      <LivePreview />
+      <LivePreview  />
     </div>
     
   );
 }
-
-
 
 export default App;

@@ -21,23 +21,23 @@ The exercises live here. The concepts are then applied in my main project, the *
 
 ## React Topics
 
-| #   | Topic                                     | Level             | Status      |
-| --- | ----------------------------------------- | ----------------- | ----------- |
-| 1   | Components + JSX                          | Essential         | Done        |
-| 2   | Props                                     | Essential         | Done        |
-| 3   | State (`useState`)                        | Essential         | Done |
-| 4   | Events                                    | Essential         |             |
-| 5   | Forms + controlled inputs                 | Essential         |             |
-| 6   | Lists + keys                              | Essential         |             |
-| 7   | Conditional rendering                     | Essential         |             |
-| 8   | Lifting state up + component organization | Essential         |             |
-| 9   | `useEffect`                               | Essential         |             |
-| 10  | Data fetching + loading/error states      | Essential         |             |
-| 11  | React Router                              | Essential         |             |
-| 12  | `useRef`, derived state                   | Useful            |             |
-| 13  | Custom hooks                              | Useful            |             |
-| 14  | Context API                               | Useful            |             |
-| 15  | `useReducer`, `useMemo`, `useCallback`    | Advanced/Optional |             |
+| #   | Topic                                     | Level             | Status |
+| --- | ----------------------------------------- | ----------------- | ------ |
+| 1   | Components + JSX                          | Essential         | Done   |
+| 2   | Props                                     | Essential         | Done   |
+| 3   | State (`useState`)                        | Essential         | Done   |
+| 4   | Events                                    | Essential         |        |
+| 5   | Forms + controlled inputs                 | Essential         |        |
+| 6   | Lists + keys                              | Essential         |        |
+| 7   | Conditional rendering                     | Essential         |        |
+| 8   | Lifting state up + component organization | Essential         |        |
+| 9   | `useEffect`                               | Essential         |        |
+| 10  | Data fetching + loading/error states      | Essential         |        |
+| 11  | React Router                              | Essential         |        |
+| 12  | `useRef`, derived state                   | Useful            |        |
+| 13  | Custom hooks                              | Useful            |        |
+| 14  | Context API                               | Useful            |        |
+| 15  | `useReducer`, `useMemo`, `useCallback`    | Advanced/Optional |        |
 
 ## Getting Started
 
@@ -137,13 +137,13 @@ function ProfileCard({ name, age, job, city }) {
 An event is something the user does (click, typing, hovering). In React you attach a handler by passing a function to an event prop on an element.
 Event props are camelCase (onClick, not onclick) and take a function, not a string.
 
-| Prop | Fires when | Useful data |
-| --- | --- | --- |
-| `onClick` | An element is clicked | `event.target.textContent` |
-| `onChange` | An input's value changes | `event.target.value` — all the text so far |
-| `onKeyDown` | A key is pressed | `event.key` — which key |
-| `onMouseEnter` | The mouse moves onto an element | — |
-| `onMouseLeave` | The mouse moves off an element | — |
+| Prop           | Fires when                      | Useful data                                |
+| -------------- | ------------------------------- | ------------------------------------------ |
+| `onClick`      | An element is clicked           | `event.target.textContent`                 |
+| `onChange`     | An input's value changes        | `event.target.value` — all the text so far |
+| `onKeyDown`    | A key is pressed                | `event.key` — which key                    |
+| `onMouseEnter` | The mouse moves onto an element | —                                          |
+| `onMouseLeave` | The mouse moves off an element  | —                                          |
 
 - React calls your handler for you and passes it an event object. Add a parameter (event or e) to receive it.
 - Never call the handler yourself in JSX: onClick={handleClick}, not onClick={handleClick()}.
@@ -185,3 +185,77 @@ A plain <input> stores what you type itself, which is why the text appears even 
 
 Name handlers after their event: handleKeyDown, handleChange, handleMouseEnter.
 State and setter names should match: isHovered and setIsHovered.
+
+### 5. Forms + Controlled Inputs
+
+## Controlled inputs
+
+- A plain <input> keeps its own text (the browser owns it). A controlled input is one where React state owns the text.
+- Two props always go together: value (what to display, from state) and onChange (updates the state).
+
+```javascript
+const [name, setName] = useState('');
+
+function handleNameChange(event) {
+  // event.target.value is the text currently in the box
+  setName(event.target.value);
+}
+
+<input value={name} onChange={handleNameChange} placeholder="Name" />;
+```
+
+- Flow on every keystroke: type → onChange runs → setter updates state → React redraws → the input shows the new value.
+- value without onChange makes the input stuck (React forces it back to the state value, and warns in the console).
+- Because React knows the text, you can use it anywhere (live previews, character counts like name.length).
+- Start text state as "" (not undefined) so the input is controlled from the first render.
+
+## Input values are always strings
+
+1. evClear the form: controlled inputs only change when state changes,
+   // so reset each state to its starting value.
+   setTitle("");
+   setAmount("");
+   setCategory("");
+   setDate("");
+   }ent.target.value is always a string, even for type="number". So amount + 1 with "5" gives "51", not 6.
+2. Convert when you calculate or save: Number(amount). For display, the string is fine.
+3. type="date" gives a string in YYYY-MM-DD format, the same format used for dates in the data.
+
+## Select (dropdown)
+
+<select> is controlled the same way, with value and onChange. It shows the option whose value matches the state, so an empty first option (value="") is selected when the state is "".
+
+```javascript
+<select value={category} onChange={handleCategoryChange}>
+  <option value="">Choose a category</option>
+  <option value="Food">Food</option>
+</select>
+```
+
+## Submitting a form
+
+- Use a <form onSubmit={handleSubmit}> with a <button type="submit">. Pressing Enter in an input submits it too.
+- By default the browser reloads the page on submit, which wipes all React state. Call event.preventDefault() first in the handler.
+- Gather the state into one object, converting types where needed:
+
+```javascript
+function handleSubmit(event) {
+  event.preventDefault();
+
+  const newExpense = {
+    title: title,
+    amount: Number(amount),
+    category: category,
+    date: date,
+  };
+  console.log(newExpense);
+
+  //
+```
+
+- Submitting doesn't change state by itself. The boxes keep their text until you reset the state.
+
+## Habits
+
+- One state variable and one handler per field, with the handler named after its event (handleTitleChange).
+- State and setter names match (category and setCategory).
