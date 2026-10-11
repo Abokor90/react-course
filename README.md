@@ -224,7 +224,7 @@ function handleNameChange(event) {
 
 ## Select (dropdown)
 
-<select> is controlled the same way, with value and onChange. It shows the option whose value matches the state, so an empty first option (value="") is selected when the state is "".
+select - is controlled the same way, with value and onChange. It shows the option whose value matches the state, so an empty first option (value="") is selected when the state is "".
 
 ```javascript
 <select value={category} onChange={handleCategoryChange}>
