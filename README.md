@@ -235,7 +235,13 @@ select - is controlled the same way, with value and onChange. It shows the optio
 
 ## Submitting a form
 
-- Use a <form onSubmit={handleSubmit}> with a <button type="submit">. Pressing Enter in an input submits it too.
+- Use a
+
+```javascript
+  <form onSubmit={handleSubmit}> with a <button type="submit">
+```
+
+Pressing Enter in an input submits it too.
 
 - By default the browser reloads the page on submit, which wipes all React state. Call event.preventDefault() first in the handler.
 
