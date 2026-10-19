@@ -21,23 +21,23 @@ The exercises live here. The concepts are then applied in my main project, the *
 
 ## React Topics
 
-| #   | Topic                                     | Level             | Status |
-| --- | ----------------------------------------- | ----------------- | ------ |
-| 1   | Components + JSX                          | Essential         | Done   |
-| 2   | Props                                     | Essential         | Done   |
-| 3   | State (`useState`)                        | Essential         | Done   |
-| 4   | Events                                    | Essential         |        |
-| 5   | Forms + controlled inputs                 | Essential         |        |
-| 6   | Lists + keys                              | Essential         |        |
-| 7   | Conditional rendering                     | Essential         |        |
-| 8   | Lifting state up + component organization | Essential         |        |
-| 9   | `useEffect`                               | Essential         |        |
-| 10  | Data fetching + loading/error states      | Essential         |        |
-| 11  | React Router                              | Essential         |        |
-| 12  | `useRef`, derived state                   | Useful            |        |
-| 13  | Custom hooks                              | Useful            |        |
-| 14  | Context API                               | Useful            |        |
-| 15  | `useReducer`, `useMemo`, `useCallback`    | Advanced/Optional |        |
+| #   | Topic                                     | Level             | Status     |
+| --- | ----------------------------------------- | ----------------- | ---------- |
+| 1   | Components + JSX                          | Essential         | Done       |
+| 2   | Props                                     | Essential         | Done       |
+| 3   | State (`useState`)                        | Essential         | Done       |
+| 4   | Events                                    | Essential         | Done       |
+| 5   | Forms + controlled inputs                 | Essential         | Done       |
+| 6   | Lists + keys                              | Essential         | In progres |
+| 7   | Conditional rendering                     | Essential         |            |
+| 8   | Lifting state up + component organization | Essential         |            |
+| 9   | `useEffect`                               | Essential         |            |
+| 10  | Data fetching + loading/error states      | Essential         |            |
+| 11  | React Router                              | Essential         |            |
+| 12  | `useRef`, derived state                   | Useful            |            |
+| 13  | Custom hooks                              | Useful            |            |
+| 14  | Context API                               | Useful            |            |
+| 15  | `useReducer`, `useMemo`, `useCallback`    | Advanced/Optional |            |
 
 ## Getting Started
 
