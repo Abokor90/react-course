@@ -65,7 +65,7 @@ Each topic gets its own numbered folder. `App.jsx` imports whichever exercise I'
 
 ## Notes
 
-### 1. Components + JSX
+# 1. Components + JSX
 
 - A component is a function that returns JSX. Its name **must start with a capital letter**, because React uses the first letter to tell components (`<ProfileCard />`) from HTML tags (`<div>`).
 - Use components **like tags**, never like function calls: `<ProfileCard />`, not `ProfileCard()`.
@@ -93,7 +93,7 @@ function ProfileCard() {
 export default ProfileCard;
 ```
 
-### 2. Props
+# 2. Props
 
 - Props pass data from parent to child. They are **read-only**, and data flows one way (parent to child).
 - Destructure props in the parameter list: `function ProfileCard({ name, age, job, city })`.
@@ -119,20 +119,20 @@ function ProfileCard({ name, age, job, city }) {
 <ProfileCard name="Abdi" age={20} job="Developer" city="London" />;
 ```
 
-## Applied in the Expense Tracker
+### Applied in the Expense Tracker
 
 | Concept          | Where it was applied                                             |
 | ---------------- | ---------------------------------------------------------------- |
 | Components + JSX | `App` and `ExpenseItem` components                               |
 | Props            | `ExpenseItem` receives `title`, `amount`, `category`, and `date` |
 
-## Debugging Habits I'm Building
+### Debugging Habits I'm Building
 
 - When the page goes blank, open the browser console (**F12 → Console**) first.
 - Read the error message before changing code.
 - Check that names match exactly: file name, `export`, `import`, and tag.
 
-### 4. Events
+# 4. Events
 
 An event is something the user does (click, typing, hovering). In React you attach a handler by passing a function to an event prop on an element.
 Event props are camelCase (onClick, not onclick) and take a function, not a string.
@@ -187,7 +187,7 @@ Name handlers after their event: handleKeyDown, handleChange, handleMouseEnter.
 
 State and setter names should match: isHovered and setIsHovered.
 
-### 5. Forms + Controlled Inputs
+# 5. Forms + Controlled Inputs
 
 ## Controlled inputs
 
