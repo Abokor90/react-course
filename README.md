@@ -10,6 +10,8 @@ The exercises live here. The concepts are then applied in my main project, the *
 
 # Full-Stack Roadmap
 
+- [x] HTML
+- [x] CSS
 - [x] JavaScript
 - [ ] **React** (in progress)
 - [ ] Node.js + Express
