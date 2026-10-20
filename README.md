@@ -270,6 +270,8 @@ function handleSubmit(event) {
 
 - State and setter names match (category and setCategory).
 
+# 6. Lists + Keys
+
 ### Rendering a list with .map()
 
 - .map() turns an array of data into an array of JSX elements, and React displays them.
