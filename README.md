@@ -269,3 +269,69 @@ function handleSubmit(event) {
 - One state variable and one handler per field, with the handler named after its event (handleTitleChange).
 
 - State and setter names match (category and setCategory).
+
+# [x] Expenses are rendered from a list of data
+
+### Rendering a list with .map()
+
+- .map() turns an array of data into an array of JSX elements, and React displays them.
+- The arrow function must return the JSX. (item) => ( ... ) with parentheses returns what's inside.
+- React can't display an object directly ("Objects are not valid as a React child"). Reach inside it: {product.name}, {product.price}.
+- Attributes on built-in HTML elements (like <li>) don't become props. Only attributes on your own components do.
+
+```javascript
+{
+  products.map((product) => (
+    <li key={product.id}>
+      {product.name}: ${product.price}
+    </li>
+  ));
+}
+```
+
+## Keys
+
+- Every element returned from .map() needs a key, on the outermost element.
+- A key must be unique among its siblings and stable: use an id from the data, not the array index.
+- An index is a position, and positions shift when items are added, removed, or reordered, so state can end up attached to the wrong item. An id identifies the item itself.
+- Duplicate keys cause a console warning, and deleting by id would remove every item sharing it.
+
+### State arrays: never change them directly
+
+- State arrays are replaced with a new array, never changed in place.
+
+```javascript
+const [products, setProducts] = useState([
+  { id: 1, name: 'Bread', price: 10 },
+  { id: 2, name: 'Milk', price: 20 },
+]);
+
+// Remove: .filter() keeps every product whose id is NOT the one removed
+function handleRemove(id) {
+  setProducts(products.filter((product) => product.id !== id));
+}
+
+// Add: spread copies the old items into a new array, plus the new one.
+// Never use products.push(...), which changes the old array.
+function handleAdd() {
+  const newProduct = { id: Date.now(), name: name, price: Number(price) };
+  setProducts([...products, newProduct]);
+}
+```
+
+- A button that needs to pass a value needs an arrow function: onClick={() => handleRemove(product.id)}. Without it, handleRemove would run during rendering.
+- Convert input strings to numbers when building the object (Number(price)), or calculations will join text instead of adding.
+- Date.now() gives a unique id for new items for now (a database will generate ids later).
+
+### Derived values don't need state
+
+If a value can be calculated from state, calculate it in the component body. It's recomputed on every render, so it can't get out of sync.
+
+```javascript
+// scores.reduce((runningTotal, item) => runningTotal + item.value, startingValue)
+const totalPrice = products.reduce((sum, product) => sum + product.price, 0);
+```
+
+### Why re-rendering makes this work
+
+When a setter runs, React runs the component function again from the top. Every calculation in the body, like totalPrice, runs again with the new state, and the JSX shows the new result.
