@@ -8,7 +8,7 @@ The exercises live here. The concepts are then applied in my main project, the *
 
 > **Status:** Phase 1 of my full-stack journey (React), in progress.
 
-## Full-Stack Roadmap
+# Full-Stack Roadmap
 
 - [x] JavaScript
 - [ ] **React** (in progress)
@@ -28,7 +28,7 @@ The exercises live here. The concepts are then applied in my main project, the *
 | 3   | State (`useState`)                        | Essential         | Done       |
 | 4   | Events                                    | Essential         | Done       |
 | 5   | Forms + controlled inputs                 | Essential         | Done       |
-| 6   | Lists + keys                              | Essential         | In progres |
+| 6   | Lists + keys                              | Essential         | Done       |
 | 7   | Conditional rendering                     | Essential         |            |
 | 8   | Lifting state up + component organization | Essential         |            |
 | 9   | `useEffect`                               | Essential         |            |
@@ -63,7 +63,7 @@ react-course/
 
 Each topic gets its own numbered folder. `App.jsx` imports whichever exercise I'm currently practicing.
 
-## Notes
+# Notes
 
 # 1. Components + JSX
 
@@ -78,20 +78,21 @@ Each topic gets its own numbered folder. `App.jsx` imports whichever exercise I'
 - Calling a method needs parentheses: `{name.toUpperCase()}`, not `{name.toUpperCase}`.
 
 ```jsx
-// A component: capital letter, returns JSX
-function ProfileCard() {
-  const name = 'Abdi';
-
-  return (
-    <div className="card">
-      {/* {} inserts a JavaScript expression */}
-      <h2>Name: {name.toUpperCase()}</h2>
-    </div>
-  );
-}
-
-export default ProfileCard;
+    // A component: capital letter, returns JSX
+    function ProfileCard() {
+      const name = 'Abdi';
+    
+      return (
+        <div className="card">
+          {/* {} inserts a JavaScript expression */}
+          <h2>Name: {name.toUpperCase()}</h2>
+        </div>
+      );
+    }
+    
+    export default ProfileCard;
 ```
+
 
 # 2. Props
 
@@ -103,20 +104,20 @@ export default ProfileCard;
 - A missing prop is `undefined`. Calling a method on it (`name.toUpperCase()`) crashes the whole page. The browser console (**F12**) shows the error.
 
 ```jsx
-// Child: receives props
-function ProfileCard({ name, age, job, city }) {
-  return (
-    <div className="card">
-      <h2>Name: {name.toUpperCase()}</h2>
-      <p>Age: {age}</p>
-      <p>Job: {job}</p>
-      <p>City: {city}</p>
-    </div>
-  );
-}
-
-// Parent: passes props (quotes for strings, {} for numbers)
-<ProfileCard name="Abdi" age={20} job="Developer" city="London" />;
+    // Child: receives props
+    function ProfileCard({ name, age, job, city }) {
+      return (
+        <div className="card">
+          <h2>Name: {name.toUpperCase()}</h2>
+          <p>Age: {age}</p>
+          <p>Job: {job}</p>
+          <p>City: {city}</p>
+        </div>
+      );
+    }
+    
+    // Parent: passes props (quotes for strings, {} for numbers)
+    <ProfileCard name="Abdi" age={20} job="Developer" city="London" />;
 ```
 
 ### Applied in the Expense Tracker
@@ -131,6 +132,7 @@ function ProfileCard({ name, age, job, city }) {
 - When the page goes blank, open the browser console (**F12 → Console**) first.
 - Read the error message before changing code.
 - Check that names match exactly: file name, `export`, `import`, and tag.
+
 
 # 4. Events
 
@@ -154,23 +156,23 @@ Event props are camelCase (onClick, not onclick) and take a function, not a stri
 Some events record a fact, so the handler sets a fixed value instead of flipping the old one:
 
 ```javascript
-const [isHovered, setIsHovered] = useState(false);
-
-// Entering always means "hovered", whatever the old value was
-function handleMouseEnter() {
-  setIsHovered(true);
-}
-
-// Leaving always means "not hovered"
-function handleMouseLeave() {
-  setIsHovered(false);
-}
-
-// The JSX shows different things depending on state
-
-<div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-  {isHovered ? 'Hovered' : 'Not hovered'}
-</div>;
+    const [isHovered, setIsHovered] = useState(false);
+    
+    // Entering always means "hovered", whatever the old value was
+    function handleMouseEnter() {
+      setIsHovered(true);
+    }
+    
+    // Leaving always means "not hovered"
+    function handleMouseLeave() {
+      setIsHovered(false);
+    }
+    
+    // The JSX shows different things depending on state
+    
+    <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      {isHovered ? 'Hovered' : 'Not hovered'}
+    </div>;
 ```
 
 - Use !value to flip only for real toggles (like a Paid/Unpaid button).
@@ -187,6 +189,7 @@ Name handlers after their event: handleKeyDown, handleChange, handleMouseEnter.
 
 State and setter names should match: isHovered and setIsHovered.
 
+
 # 5. Forms + Controlled Inputs
 
 ## Controlled inputs
@@ -196,14 +199,14 @@ State and setter names should match: isHovered and setIsHovered.
 - Two props always go together: value (what to display, from state) and onChange (updates the state).
 
 ```javascript
-const [name, setName] = useState('');
-
-function handleNameChange(event) {
-  // event.target.value is the text currently in the box
-  setName(event.target.value);
-}
-
-<input value={name} onChange={handleNameChange} placeholder="Name" />;
+    const [name, setName] = useState('');
+    
+    function handleNameChange(event) {
+      // event.target.value is the text currently in the box
+      setName(event.target.value);
+    }
+    
+    <input value={name} onChange={handleNameChange} placeholder="Name" />;
 ```
 
 - Flow on every keystroke: type → onChange runs → setter updates state → React redraws → the input shows the new value.
@@ -227,10 +230,10 @@ function handleNameChange(event) {
 select - is controlled the same way, with value and onChange. It shows the option whose value matches the state, so an empty first option (value="") is selected when the state is "".
 
 ```javascript
-<select value={category} onChange={handleCategoryChange}>
-  <option value="">Choose a category</option>
-  <option value="Food">Food</option>
-</select>
+    <select value={category} onChange={handleCategoryChange}>
+      <option value="">Choose a category</option>
+      <option value="Food">Food</option>
+    </select>
 ```
 
 ## Submitting a form
@@ -248,18 +251,18 @@ Pressing Enter in an input submits it too.
 - Gather the state into one object, converting types where needed:
 
 ```javascript
-function handleSubmit(event) {
-  event.preventDefault();
-
-  const newExpense = {
-    title: title,
-    amount: Number(amount),
-    category: category,
-    date: date,
-  };
-  console.log(newExpense);
-
-  //
+    function handleSubmit(event) {
+      event.preventDefault();
+    
+      const newExpense = {
+        title: title,
+        amount: Number(amount),
+        category: category,
+        date: date,
+      };
+      console.log(newExpense);
+    
+      //
 ```
 
 - Submitting doesn't change state by itself. The boxes keep their text until you reset the state.
@@ -269,6 +272,7 @@ function handleSubmit(event) {
 - One state variable and one handler per field, with the handler named after its event (handleTitleChange).
 
 - State and setter names match (category and setCategory).
+
 
 # 6. Lists + Keys
 
@@ -280,13 +284,13 @@ function handleSubmit(event) {
 - Attributes on built-in HTML elements (like <li>) don't become props. Only attributes on your own components do.
 
 ```javascript
-{
-  products.map((product) => (
-    <li key={product.id}>
-      {product.name}: ${product.price}
-    </li>
-  ));
-}
+    {
+      products.map((product) => (
+        <li key={product.id}>
+          {product.name}: ${product.price}
+        </li>
+      ));
+    }
 ```
 
 ## Keys
@@ -301,22 +305,22 @@ function handleSubmit(event) {
 - State arrays are replaced with a new array, never changed in place.
 
 ```javascript
-const [products, setProducts] = useState([
-  { id: 1, name: 'Bread', price: 10 },
-  { id: 2, name: 'Milk', price: 20 },
-]);
-
-// Remove: .filter() keeps every product whose id is NOT the one removed
-function handleRemove(id) {
-  setProducts(products.filter((product) => product.id !== id));
-}
-
-// Add: spread copies the old items into a new array, plus the new one.
-// Never use products.push(...), which changes the old array.
-function handleAdd() {
-  const newProduct = { id: Date.now(), name: name, price: Number(price) };
-  setProducts([...products, newProduct]);
-}
+    const [products, setProducts] = useState([
+      { id: 1, name: 'Bread', price: 10 },
+      { id: 2, name: 'Milk', price: 20 },
+    ]);
+    
+    // Remove: .filter() keeps every product whose id is NOT the one removed
+    function handleRemove(id) {
+      setProducts(products.filter((product) => product.id !== id));
+    }
+    
+    // Add: spread copies the old items into a new array, plus the new one.
+    // Never use products.push(...), which changes the old array.
+    function handleAdd() {
+      const newProduct = { id: Date.now(), name: name, price: Number(price) };
+      setProducts([...products, newProduct]);
+    }
 ```
 
 - A button that needs to pass a value needs an arrow function: onClick={() => handleRemove(product.id)}. Without it, handleRemove would run during rendering.
@@ -328,8 +332,8 @@ function handleAdd() {
 If a value can be calculated from state, calculate it in the component body. It's recomputed on every render, so it can't get out of sync.
 
 ```javascript
-// scores.reduce((runningTotal, item) => runningTotal + item.value, startingValue)
-const totalPrice = products.reduce((sum, product) => sum + product.price, 0);
+    // scores.reduce((runningTotal, item) => runningTotal + item.value, startingValue)
+    const totalPrice = products.reduce((sum, product) => sum + product.price, 0);
 ```
 
 ### Why re-rendering makes this work
