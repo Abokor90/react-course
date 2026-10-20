@@ -12,6 +12,7 @@ The exercises live here. The concepts are then applied in my main project, the *
 
 - [x] HTML
 - [x] CSS
+- [x] Git and GitHub
 - [x] JavaScript
 - [ ] **React** (in progress)
 - [ ] Node.js + Express
