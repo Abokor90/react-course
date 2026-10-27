@@ -1,9 +1,10 @@
-import ShoppingList from "./07-lists/practice/ShoppingList";
+import Inbox from "./08-conditional-rendering/practice/Inbox";
 
 function App() {
   return (
     <div>
-      <ShoppingList />
+      {/* <ShoppingList /> */}
+      <Inbox />
     </div>
   );
 }

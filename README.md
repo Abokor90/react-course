@@ -24,23 +24,23 @@ The exercises live here. The concepts are then applied in my main project, the *
 
 ## React Topics
 
-| #   | Topic                                     | Level             | Status     |
-| --- | ----------------------------------------- | ----------------- | ---------- |
-| 1   | Components + JSX                          | Essential         | Done       |
-| 2   | Props                                     | Essential         | Done       |
-| 3   | State (`useState`)                        | Essential         | Done       |
-| 4   | Events                                    | Essential         | Done       |
-| 5   | Forms + controlled inputs                 | Essential         | Done       |
-| 6   | Lists + keys                              | Essential         | Done       |
-| 7   | Conditional rendering                     | Essential         |            |
-| 8   | Lifting state up + component organization | Essential         |            |
-| 9   | `useEffect`                               | Essential         |            |
-| 10  | Data fetching + loading/error states      | Essential         |            |
-| 11  | React Router                              | Essential         |            |
-| 12  | `useRef`, derived state                   | Useful            |            |
-| 13  | Custom hooks                              | Useful            |            |
-| 14  | Context API                               | Useful            |            |
-| 15  | `useReducer`, `useMemo`, `useCallback`    | Advanced/Optional |            |
+| #   | Topic                                     | Level             | Status |
+| --- | ----------------------------------------- | ----------------- | ------ |
+| 1   | Components + JSX                          | Essential         | Done   |
+| 2   | Props                                     | Essential         | Done   |
+| 3   | State (`useState`)                        | Essential         | Done   |
+| 4   | Events                                    | Essential         | Done   |
+| 5   | Forms + controlled inputs                 | Essential         | Done   |
+| 6   | Lists + keys                              | Essential         | Done   |
+| 7   | Conditional rendering                     | Essential         |        |
+| 8   | Lifting state up + component organization | Essential         |        |
+| 9   | `useEffect`                               | Essential         |        |
+| 10  | Data fetching + loading/error states      | Essential         |        |
+| 11  | React Router                              | Essential         |        |
+| 12  | `useRef`, derived state                   | Useful            |        |
+| 13  | Custom hooks                              | Useful            |        |
+| 14  | Context API                               | Useful            |        |
+| 15  | `useReducer`, `useMemo`, `useCallback`    | Advanced/Optional |        |
 
 ## Getting Started
 
@@ -81,21 +81,20 @@ Each topic gets its own numbered folder. `App.jsx` imports whichever exercise I'
 - Calling a method needs parentheses: `{name.toUpperCase()}`, not `{name.toUpperCase}`.
 
 ```jsx
-    // A component: capital letter, returns JSX
-    function ProfileCard() {
-      const name = 'Abdi';
-    
-      return (
-        <div className="card">
-          {/* {} inserts a JavaScript expression */}
-          <h2>Name: {name.toUpperCase()}</h2>
-        </div>
-      );
-    }
-    
-    export default ProfileCard;
-```
+// A component: capital letter, returns JSX
+function ProfileCard() {
+  const name = 'Abdi';
 
+  return (
+    <div className="card">
+      {/* {} inserts a JavaScript expression */}
+      <h2>Name: {name.toUpperCase()}</h2>
+    </div>
+  );
+}
+
+export default ProfileCard;
+```
 
 # 2. Props
 
@@ -107,20 +106,20 @@ Each topic gets its own numbered folder. `App.jsx` imports whichever exercise I'
 - A missing prop is `undefined`. Calling a method on it (`name.toUpperCase()`) crashes the whole page. The browser console (**F12**) shows the error.
 
 ```jsx
-    // Child: receives props
-    function ProfileCard({ name, age, job, city }) {
-      return (
-        <div className="card">
-          <h2>Name: {name.toUpperCase()}</h2>
-          <p>Age: {age}</p>
-          <p>Job: {job}</p>
-          <p>City: {city}</p>
-        </div>
-      );
-    }
-    
-    // Parent: passes props (quotes for strings, {} for numbers)
-    <ProfileCard name="Abdi" age={20} job="Developer" city="London" />;
+// Child: receives props
+function ProfileCard({ name, age, job, city }) {
+  return (
+    <div className="card">
+      <h2>Name: {name.toUpperCase()}</h2>
+      <p>Age: {age}</p>
+      <p>Job: {job}</p>
+      <p>City: {city}</p>
+    </div>
+  );
+}
+
+// Parent: passes props (quotes for strings, {} for numbers)
+<ProfileCard name="Abdi" age={20} job="Developer" city="London" />;
 ```
 
 ### Applied in the Expense Tracker
@@ -135,7 +134,6 @@ Each topic gets its own numbered folder. `App.jsx` imports whichever exercise I'
 - When the page goes blank, open the browser console (**F12 → Console**) first.
 - Read the error message before changing code.
 - Check that names match exactly: file name, `export`, `import`, and tag.
-
 
 # 4. Events
 
@@ -159,23 +157,23 @@ Event props are camelCase (onClick, not onclick) and take a function, not a stri
 Some events record a fact, so the handler sets a fixed value instead of flipping the old one:
 
 ```javascript
-    const [isHovered, setIsHovered] = useState(false);
-    
-    // Entering always means "hovered", whatever the old value was
-    function handleMouseEnter() {
-      setIsHovered(true);
-    }
-    
-    // Leaving always means "not hovered"
-    function handleMouseLeave() {
-      setIsHovered(false);
-    }
-    
-    // The JSX shows different things depending on state
-    
-    <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-      {isHovered ? 'Hovered' : 'Not hovered'}
-    </div>;
+const [isHovered, setIsHovered] = useState(false);
+
+// Entering always means "hovered", whatever the old value was
+function handleMouseEnter() {
+  setIsHovered(true);
+}
+
+// Leaving always means "not hovered"
+function handleMouseLeave() {
+  setIsHovered(false);
+}
+
+// The JSX shows different things depending on state
+
+<div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+  {isHovered ? 'Hovered' : 'Not hovered'}
+</div>;
 ```
 
 - Use !value to flip only for real toggles (like a Paid/Unpaid button).
@@ -192,7 +190,6 @@ Name handlers after their event: handleKeyDown, handleChange, handleMouseEnter.
 
 State and setter names should match: isHovered and setIsHovered.
 
-
 # 5. Forms + Controlled Inputs
 
 ## Controlled inputs
@@ -202,14 +199,14 @@ State and setter names should match: isHovered and setIsHovered.
 - Two props always go together: value (what to display, from state) and onChange (updates the state).
 
 ```javascript
-    const [name, setName] = useState('');
-    
-    function handleNameChange(event) {
-      // event.target.value is the text currently in the box
-      setName(event.target.value);
-    }
-    
-    <input value={name} onChange={handleNameChange} placeholder="Name" />;
+const [name, setName] = useState('');
+
+function handleNameChange(event) {
+  // event.target.value is the text currently in the box
+  setName(event.target.value);
+}
+
+<input value={name} onChange={handleNameChange} placeholder="Name" />;
 ```
 
 - Flow on every keystroke: type → onChange runs → setter updates state → React redraws → the input shows the new value.
@@ -233,10 +230,10 @@ State and setter names should match: isHovered and setIsHovered.
 select - is controlled the same way, with value and onChange. It shows the option whose value matches the state, so an empty first option (value="") is selected when the state is "".
 
 ```javascript
-    <select value={category} onChange={handleCategoryChange}>
-      <option value="">Choose a category</option>
-      <option value="Food">Food</option>
-    </select>
+<select value={category} onChange={handleCategoryChange}>
+  <option value="">Choose a category</option>
+  <option value="Food">Food</option>
+</select>
 ```
 
 ## Submitting a form
@@ -256,7 +253,7 @@ Pressing Enter in an input submits it too.
 ```javascript
     function handleSubmit(event) {
       event.preventDefault();
-    
+
       const newExpense = {
         title: title,
         amount: Number(amount),
@@ -264,7 +261,7 @@ Pressing Enter in an input submits it too.
         date: date,
       };
       console.log(newExpense);
-    
+
       //
 ```
 
@@ -276,7 +273,6 @@ Pressing Enter in an input submits it too.
 
 - State and setter names match (category and setCategory).
 
-
 # 6. Lists + Keys
 
 ### Rendering a list with .map()
@@ -287,13 +283,13 @@ Pressing Enter in an input submits it too.
 - Attributes on built-in HTML elements (like <li>) don't become props. Only attributes on your own components do.
 
 ```javascript
-    {
-      products.map((product) => (
-        <li key={product.id}>
-          {product.name}: ${product.price}
-        </li>
-      ));
-    }
+{
+  products.map((product) => (
+    <li key={product.id}>
+      {product.name}: ${product.price}
+    </li>
+  ));
+}
 ```
 
 ## Keys
@@ -308,22 +304,22 @@ Pressing Enter in an input submits it too.
 - State arrays are replaced with a new array, never changed in place.
 
 ```javascript
-    const [products, setProducts] = useState([
-      { id: 1, name: 'Bread', price: 10 },
-      { id: 2, name: 'Milk', price: 20 },
-    ]);
-    
-    // Remove: .filter() keeps every product whose id is NOT the one removed
-    function handleRemove(id) {
-      setProducts(products.filter((product) => product.id !== id));
-    }
-    
-    // Add: spread copies the old items into a new array, plus the new one.
-    // Never use products.push(...), which changes the old array.
-    function handleAdd() {
-      const newProduct = { id: Date.now(), name: name, price: Number(price) };
-      setProducts([...products, newProduct]);
-    }
+const [products, setProducts] = useState([
+  { id: 1, name: 'Bread', price: 10 },
+  { id: 2, name: 'Milk', price: 20 },
+]);
+
+// Remove: .filter() keeps every product whose id is NOT the one removed
+function handleRemove(id) {
+  setProducts(products.filter((product) => product.id !== id));
+}
+
+// Add: spread copies the old items into a new array, plus the new one.
+// Never use products.push(...), which changes the old array.
+function handleAdd() {
+  const newProduct = { id: Date.now(), name: name, price: Number(price) };
+  setProducts([...products, newProduct]);
+}
 ```
 
 - A button that needs to pass a value needs an arrow function: onClick={() => handleRemove(product.id)}. Without it, handleRemove would run during rendering.
@@ -335,10 +331,90 @@ Pressing Enter in an input submits it too.
 If a value can be calculated from state, calculate it in the component body. It's recomputed on every render, so it can't get out of sync.
 
 ```javascript
-    // scores.reduce((runningTotal, item) => runningTotal + item.value, startingValue)
-    const totalPrice = products.reduce((sum, product) => sum + product.price, 0);
+// scores.reduce((runningTotal, item) => runningTotal + item.value, startingValue)
+const totalPrice = products.reduce((sum, product) => sum + product.price, 0);
 ```
 
 ### Why re-rendering makes this work
 
 When a setter runs, React runs the component function again from the top. Every calculation in the body, like totalPrice, runs again with the new state, and the JSX shows the new result.
+
+# 7. Conditional Rendering
+
+Conditional rendering means the JSX changes depending on state or props. React has no special syntax for it: you use plain JavaScript expressions inside {}.
+
+## Three Ways to Render Conditional UI in React
+
+| Method                 | When to Use It                                                           | Example                             |
+| ---------------------- | ------------------------------------------------------------------------ | ----------------------------------- |
+| **Ternary (`? :`)**    | When there are two possible outcomes.                                    | `{isOpen ? "Hide" : "Show"}`        |
+| **Logical AND (`&&`)** | When you want to show something or render nothing.                       | `{isOpen && <ul>...</ul>}`          |
+| **Early `return`**     | When a component should return something different based on a condition. | `if (!name) return <p>No name</p>;` |
+
+### Quick Summary
+
+- **Ternary:** Choose between two outcomes.
+- **`&&`:** Show something only when a condition is true.
+- **Early `return`:** Exit the component early and return different content.
+
+```javascript
+// Two outcomes: ternary
+{
+  messages.length === 0 ? (
+    <p>You have no messages</p>
+  ) : (
+    <p>You have {messages.length} messages</p>
+  );
+}
+
+// One outcome (show or nothing): &&
+{
+  isOpen && (
+    <ul>
+      {messages.map((message) => (
+        <li key={message.id}>{message.text}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+- {} only accepts expressions, so if statements can't go directly inside JSX. A ternary and && are expressions. An if goes above the return (an early return).
+  && is a gate: only what's directly to its right - appears and disappears. Whatever should be hidden (the whole <ul>, with its .map() inside) has to be behind it.
+- Use one piece of state to drive everything that depends on it. The isOpen state controls both the button label and whether the list shows.
+
+## The && trap
+
+&& doesn't return true or false. It returns the left side itself when the left side is falsy. React skips false, null, and undefined, but it displays numbers.
+
+```javascript
+// BUG: when the array is empty, [].length is 0, and "0" appears on the page
+{
+  messages.length && <button>Clear all</button>;
+}
+
+// SAFE: a comparison always gives a real true or false
+{
+  messages.length > 0 && <button>Clear all</button>;
+}
+```
+
+Rule: put a comparison on the left of && whenever the left side could be a number.
+
+## Clearing a list
+
+Clearing everything doesn't need .filter() or an id. Give the setter an empty array:
+
+```javascript
+function handleClearAll() {
+  setMessages([]);
+}
+
+// No value to pass, so pass the function itself (no parentheses, no arrow)
+<button onClick={handleClearAll}>Clear all</button>;
+```
+
+### Habits
+
+- When you rename a function, rename every place that uses it. A leftover old name crashes the page (... is not defined).
+- Handlers that toggle a boolean are just setValue(!value), with no if needed.
