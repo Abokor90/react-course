@@ -32,7 +32,7 @@ The exercises live here. The concepts are then applied in my main project, the *
 | 4   | Events                                    | Essential         | Done   |
 | 5   | Forms + controlled inputs                 | Essential         | Done   |
 | 6   | Lists + keys                              | Essential         | Done   |
-| 7   | Conditional rendering                     | Essential         |        |
+| 7   | Conditional rendering                     | Essential         | Done   |
 | 8   | Lifting state up + component organization | Essential         |        |
 | 9   | `useEffect`                               | Essential         |        |
 | 10  | Data fetching + loading/error states      | Essential         |        |
@@ -339,6 +339,7 @@ const totalPrice = products.reduce((sum, product) => sum + product.price, 0);
 
 When a setter runs, React runs the component function again from the top. Every calculation in the body, like totalPrice, runs again with the new state, and the JSX shows the new result.
 
+
 # 7. Conditional Rendering
 
 Conditional rendering means the JSX changes depending on state or props. React has no special syntax for it: you use plain JavaScript expressions inside {}.
@@ -351,33 +352,34 @@ Conditional rendering means the JSX changes depending on state or props. React h
 | **Logical AND (`&&`)** | When you want to show something or render nothing.                       | `{isOpen && <ul>...</ul>}`          |
 | **Early `return`**     | When a component should return something different based on a condition. | `if (!name) return <p>No name</p>;` |
 
+
 ### Quick Summary
 
 - **Ternary:** Choose between two outcomes.
 - **`&&`:** Show something only when a condition is true.
 - **Early `return`:** Exit the component early and return different content.
 
-```javascript
-// Two outcomes: ternary
-{
-  messages.length === 0 ? (
-    <p>You have no messages</p>
-  ) : (
-    <p>You have {messages.length} messages</p>
-  );
-}
-
-// One outcome (show or nothing): &&
-{
-  isOpen && (
-    <ul>
-      {messages.map((message) => (
-        <li key={message.id}>{message.text}</li>
-      ))}
-    </ul>
-  );
-}
-```
+    ```
+    // Two outcomes: ternary
+    {
+      messages.length === 0 ? (
+        <p>You have no messages</p>
+      ) : (
+        <p>You have {messages.length} messages</p>
+      );
+    }
+    
+    // One outcome (show or nothing): &&
+    {
+      isOpen && (
+        <ul>
+          {messages.map((message) => (
+            <li key={message.id}>{message.text}</li>
+          ))}
+        </ul>
+      );
+    }
+    ```
 
 - {} only accepts expressions, so if statements can't go directly inside JSX. A ternary and && are expressions. An if goes above the return (an early return).
   && is a gate: only what's directly to its right - appears and disappears. Whatever should be hidden (the whole <ul>, with its .map() inside) has to be behind it.
@@ -387,32 +389,32 @@ Conditional rendering means the JSX changes depending on state or props. React h
 
 && doesn't return true or false. It returns the left side itself when the left side is falsy. React skips false, null, and undefined, but it displays numbers.
 
-```javascript
-// BUG: when the array is empty, [].length is 0, and "0" appears on the page
-{
-  messages.length && <button>Clear all</button>;
-}
+    ```javascript
+    // BUG: when the array is empty, [].length is 0, and "0" appears on the page
+    {
+      messages.length && <button>Clear all</button>;
+    }
+    
+    // SAFE: a comparison always gives a real true or false
+    {
+      messages.length > 0 && <button>Clear all</button>;
+    }
+    ```
 
-// SAFE: a comparison always gives a real true or false
-{
-  messages.length > 0 && <button>Clear all</button>;
-}
-```
-
-Rule: put a comparison on the left of && whenever the left side could be a number.
+#### Rule: put a comparison on the left of && whenever the left side could be a number.
 
 ## Clearing a list
 
 Clearing everything doesn't need .filter() or an id. Give the setter an empty array:
 
-```javascript
-function handleClearAll() {
-  setMessages([]);
-}
-
-// No value to pass, so pass the function itself (no parentheses, no arrow)
-<button onClick={handleClearAll}>Clear all</button>;
-```
+    ```
+    function handleClearAll() {
+      setMessages([]);
+    }
+    
+    // No value to pass, so pass the function itself (no parentheses, no arrow)
+    <button onClick={handleClearAll}>Clear all</button>;
+    ```
 
 ### Habits
 
