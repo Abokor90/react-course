@@ -94,7 +94,7 @@ Each topic gets its own numbered folder. `App.jsx` imports whichever exercise I'
     }
     
     export default ProfileCard;
-    ```
+ ```
 
 # 2. Props
 
