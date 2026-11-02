@@ -120,7 +120,7 @@ Each topic gets its own numbered folder. `App.jsx` imports whichever exercise I'
     
     // Parent: passes props (quotes for strings, {} for numbers)
     <ProfileCard name="Abdi" age={20} job="Developer" city="London" />;
-  ```
+   ```
 
 
 ### Applied in the Expense Tracker
@@ -176,6 +176,7 @@ Some events record a fact, so the handler sets a fixed value instead of flipping
       {isHovered ? 'Hovered' : 'Not hovered'}
     </div>;
     ```
+
 
 - Use !value to flip only for real toggles (like a Paid/Unpaid button).
 - Don't edit the page by hand (innerHTML) or store results on the event object. Change state, and the JSX shows the result.
@@ -326,6 +327,7 @@ Pressing Enter in an input submits it too.
     }
     ```
 
+
 - A button that needs to pass a value needs an arrow function: onClick={() => handleRemove(product.id)}. Without it, handleRemove  would run during rendering.
 - Convert input strings to numbers when building the object (Number(price)), or calculations will join text instead of adding.
 - Date.now() gives a unique id for new items for now (a database will generate ids later).
@@ -338,6 +340,7 @@ If a value can be calculated from state, calculate it in the component body. It'
     // scores.reduce((runningTotal, item) => runningTotal + item.value, startingValue)
     const totalPrice = products.reduce((sum, product) => sum + product.price, 0);
     ```
+
 
 ### Why re-rendering makes this work
 
