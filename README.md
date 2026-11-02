@@ -418,3 +418,81 @@ function handleClearAll() {
 
 - When you rename a function, rename every place that uses it. A leftover old name crashes the page (... is not defined).
 - Handlers that toggle a boolean are just setValue(!value), with no if needed.
+
+# Lifting State Up
+
+### The problem
+
+Data flows down in React: a parent passes data to a child through props. A child can't change its parent's state, and two sibling components can't see each other. So how does a form add something to a list that lives somewhere else?
+
+The solution
+
+1. Keep the state in the parent that sits above everything that needs it. Here, both the form (to add) and the list (to show) need notes, so NotesApp owns it.
+2. The parent writes the function that changes the state.
+3. The parent passes that function down to the child as a prop.
+4. The child calls the function with its data when something happens, which sends the data up.
+
+```javascript
+// CHILD: receives a function as a prop and calls it with the data
+function NoteForm({ onAddNote }) {
+  const [text, setText] = useState('');
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    onAddNote(text); // data travels UP
+    setText('');
+  }
+  // ...controlled input and submit button
+}
+
+// CHILD: only displays what it's given
+function NoteList({ notes }) {
+  return (
+    <ul>
+      {notes.map((note) => (
+        <li key={note.id}>{note.text}</li>
+      ))}
+    </ul>
+  );
+}
+
+// PARENT: owns the state and the function that changes it
+function NotesApp() {
+  const [notes, setNotes] = useState([{ id: 1, text: 'First note' }]);
+
+  function handleAddNote(text) {
+    const newNote = { id: Date.now(), text: text };
+    setNotes([...notes, newNote]);
+  }
+
+  return (
+    <div>
+      {/* the function goes DOWN (no parentheses) */}
+      <NoteForm onAddNote={handleAddNote} />
+      {/* the data goes DOWN */}
+      <NoteList notes={notes} />
+    </div>
+  );
+}
+```
+
+#### Up and down follow the component tree
+
+| What                     | From                | To                  | Direction                                                    |
+| ------------------------ | ------------------- | ------------------- | ------------------------------------------------------------ |
+| `handleAddNote` function | `NotesApp` (parent) | `NoteForm` (child)  | Down — passed as a prop                                      |
+| Typed text               | `NoteForm` (child)  | `NotesApp` (parent) | Up — passed as an argument when the child calls the function |
+| `notes` array            | `NotesApp` (parent) | `NoteList` (child)  | Down — passed as a prop                                      |
+
+The full path of a new note: typed in NoteForm → onAddNote(text) (up) → handleAddNote runs in NotesApp → setNotes changes the state → NotesApp re-renders → notes is passed down to NoteList. The two siblings never talk to each other directly.
+
+### Rules to remember
+
+- State lives in the lowest component that sits above everything that needs it.
+- Only the component that owns state can change it, through its own setter.
+- Pass the function without parentheses (onAddNote={handleAddNote}), so the child can call it later. With parentheses, it runs during rendering.
+- Prop names that announce an event start with on (onAddNote). The real functions start with handle (handleAddNote).
+- Each component keeps its own separate state for its own concerns (the form's text stays in the form).
+- The component that owns the list creates the ids, because it's the only one that can see every item.
+- Spread works on arrays ([...notes, newNote]) and on objects ({ ...expense }).
+- A function is not a component. Never write <handleAddNote />.

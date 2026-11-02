@@ -1,10 +1,9 @@
-import Inbox from "./08-conditional-rendering/practice/Inbox";
+import NotesApp from "./09-lifting/practice/NotesApp";
 
 function App() {
   return (
     <div>
-      {/* <ShoppingList /> */}
-      <Inbox />
+      <NotesApp />
     </div>
   );
 }
