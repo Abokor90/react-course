@@ -120,7 +120,8 @@ Each topic gets its own numbered folder. `App.jsx` imports whichever exercise I'
     
     // Parent: passes props (quotes for strings, {} for numbers)
     <ProfileCard name="Abdi" age={20} job="Developer" city="London" />;
-```
+  ```
+
 
 ### Applied in the Expense Tracker
 
@@ -216,6 +217,7 @@ State and setter names should match: isHovered and setIsHovered.
 - Because React knows the text, you can use it anywhere (live previews, character counts like name.length).
 
 - Start text state as "" (not undefined) so the input is controlled from the first render.
+  
 
 ## Input values are always strings
 
@@ -224,6 +226,7 @@ State and setter names should match: isHovered and setIsHovered.
 2. Convert when you calculate or save: Number(amount). For display, the string is fine.
 
 3. type="date" gives a string in YYYY-MM-DD format, the same format used for dates in the data.
+   
 
 ## Select (dropdown)
 
@@ -266,6 +269,7 @@ Pressing Enter in an input submits it too.
 ```
 
 - Submitting doesn't change state by itself. The boxes keep their text until you reset the state.
+  
 
 ## Habits
 
@@ -322,7 +326,7 @@ Pressing Enter in an input submits it too.
     }
     ```
 
-- A button that needs to pass a value needs an arrow function: onClick={() => handleRemove(product.id)}. Without it, handleRemove would run during rendering.
+- A button that needs to pass a value needs an arrow function: onClick={() => handleRemove(product.id)}. Without it, handleRemove  would run during rendering.
 - Convert input strings to numbers when building the object (Number(price)), or calculations will join text instead of adding.
 - Date.now() gives a unique id for new items for now (a database will generate ids later).
 
