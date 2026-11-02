@@ -229,12 +229,14 @@ function handleNameChange(event) {
 
 select - is controlled the same way, with value and onChange. It shows the option whose value matches the state, so an empty first option (value="") is selected when the state is "".
 
-```javascript
-<select value={category} onChange={handleCategoryChange}>
+````javascript
+<select value={category} onChange=
+  {handleCategoryChange}>
   <option value="">Choose a category</option>
   <option value="Food">Food</option>
-</select>
-```
+</select
+```>
+
 
 ## Submitting a form
 
@@ -242,7 +244,7 @@ select - is controlled the same way, with value and onChange. It shows the optio
 
 ```javascript
   <form onSubmit={handleSubmit}> with a <button type="submit">
-```
+````
 
 Pressing Enter in an input submits it too.
 
@@ -357,7 +359,7 @@ Conditional rendering means the JSX changes depending on state or props. React h
 - **`&&`:** Show something only when a condition is true.
 - **Early `return`:** Exit the component early and return different content.
 
-  ```
+  ```javascript
   // Two outcomes: ternary
   {
     messages.length === 0 ? (
@@ -387,17 +389,17 @@ Conditional rendering means the JSX changes depending on state or props. React h
 
 && doesn't return true or false. It returns the left side itself when the left side is falsy. React skips false, null, and undefined, but it displays numbers.
 
-    ```javascript
-    // BUG: when the array is empty, [].length is 0, and "0" appears on the page
-    {
-      messages.length && <button>Clear all</button>;
-    }
+```javascript
+// BUG: when the array is empty, [].length is 0, and "0" appears on the page
+{
+  messages.length && <button>Clear all</button>;
+}
 
-    // SAFE: a comparison always gives a real true or false
-    {
-      messages.length > 0 && <button>Clear all</button>;
-    }
-    ```
+// SAFE: a comparison always gives a real true or false
+{
+  messages.length > 0 && <button>Clear all</button>;
+}
+```
 
 #### Rule: put a comparison on the left of && whenever the left side could be a number.
 
@@ -405,14 +407,14 @@ Conditional rendering means the JSX changes depending on state or props. React h
 
 Clearing everything doesn't need .filter() or an id. Give the setter an empty array:
 
-    ```
-    function handleClearAll() {
-      setMessages([]);
-    }
+```javascript
+function handleClearAll() {
+  setMessages([]);
+}
 
-    // No value to pass, so pass the function itself (no parentheses, no arrow)
-    <button onClick={handleClearAll}>Clear all</button>;
-    ```
+// No value to pass, so pass the function itself (no parentheses, no arrow)
+<button onClick={handleClearAll}>Clear all</button>;
+```
 
 ### Habits
 
