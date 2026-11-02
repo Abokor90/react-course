@@ -407,7 +407,7 @@ Clearing everything doesn't need .filter() or an id. Give the setter an empty ar
 
 ```markdown
     function handleClearAll() {
-    setMessages([]);
+        setMessages([]);
     }
     
     // No value to pass, so pass the function itself (no parentheses, no arrow)
