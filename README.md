@@ -33,7 +33,7 @@ The exercises live here. The concepts are then applied in my main project, the *
 | 5   | Forms + controlled inputs                 | Essential         | Done   |
 | 6   | Lists + keys                              | Essential         | Done   |
 | 7   | Conditional rendering                     | Essential         | Done   |
-| 8   | Lifting state up + component organization | Essential         |        |
+| 8   | Lifting state up + component organization | Essential         | Done   |
 | 9   | `useEffect`                               | Essential         |        |
 | 10  | Data fetching + loading/error states      | Essential         |        |
 | 11  | React Router                              | Essential         |        |
@@ -81,20 +81,20 @@ Each topic gets its own numbered folder. `App.jsx` imports whichever exercise I'
 - Calling a method needs parentheses: `{name.toUpperCase()}`, not `{name.toUpperCase}`.
 
 ```jsx
-// A component: capital letter, returns JSX
-function ProfileCard() {
-  const name = 'Abdi';
-
-  return (
-    <div className="card">
-      {/* {} inserts a JavaScript expression */}
-      <h2>Name: {name.toUpperCase()}</h2>
-    </div>
-  );
-}
-
-export default ProfileCard;
-```
+    // A component: capital letter, returns JSX
+    function ProfileCard() {
+      const name = 'Abdi';
+    
+      return (
+        <div className="card">
+          {/* {} inserts a JavaScript expression */}
+          <h2>Name: {name.toUpperCase()}</h2>
+        </div>
+      );
+    }
+    
+    export default ProfileCard;
+ ```
 
 # 2. Props
 
@@ -105,22 +105,23 @@ export default ProfileCard;
 - A prop's type matters when you calculate: `"20" + "20"` is `"2020"`, but `20 + 20` is `40`.
 - A missing prop is `undefined`. Calling a method on it (`name.toUpperCase()`) crashes the whole page. The browser console (**F12**) shows the error.
 
-```jsx
-// Child: receives props
-function ProfileCard({ name, age, job, city }) {
-  return (
-    <div className="card">
-      <h2>Name: {name.toUpperCase()}</h2>
-      <p>Age: {age}</p>
-      <p>Job: {job}</p>
-      <p>City: {city}</p>
-    </div>
-  );
-}
+    ```jsx
+    // Child: receives props
+    function ProfileCard({ name, age, job, city }) {
+      return (
+        <div className="card">
+          <h2>Name: {name.toUpperCase()}</h2>
+          <p>Age: {age}</p>
+          <p>Job: {job}</p>
+          <p>City: {city}</p>
+        </div>
+      );
+    }
+    
+    // Parent: passes props (quotes for strings, {} for numbers)
+    <ProfileCard name="Abdi" age={20} job="Developer" city="London" />;
+   ```
 
-// Parent: passes props (quotes for strings, {} for numbers)
-<ProfileCard name="Abdi" age={20} job="Developer" city="London" />;
-```
 
 ### Applied in the Expense Tracker
 
@@ -156,25 +157,26 @@ Event props are camelCase (onClick, not onclick) and take a function, not a stri
 
 Some events record a fact, so the handler sets a fixed value instead of flipping the old one:
 
-```javascript
-const [isHovered, setIsHovered] = useState(false);
+    ```javascript
+    const [isHovered, setIsHovered] = useState(false);
+    
+    // Entering always means "hovered", whatever the old value was
+    function handleMouseEnter() {
+      setIsHovered(true);
+    }
+    
+    // Leaving always means "not hovered"
+    function handleMouseLeave() {
+      setIsHovered(false);
+    }
+    
+    // The JSX shows different things depending on state
+    
+    <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      {isHovered ? 'Hovered' : 'Not hovered'}
+    </div>;
+    ```
 
-// Entering always means "hovered", whatever the old value was
-function handleMouseEnter() {
-  setIsHovered(true);
-}
-
-// Leaving always means "not hovered"
-function handleMouseLeave() {
-  setIsHovered(false);
-}
-
-// The JSX shows different things depending on state
-
-<div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-  {isHovered ? 'Hovered' : 'Not hovered'}
-</div>;
-```
 
 - Use !value to flip only for real toggles (like a Paid/Unpaid button).
 - Don't edit the page by hand (innerHTML) or store results on the event object. Change state, and the JSX shows the result.
@@ -198,16 +200,16 @@ State and setter names should match: isHovered and setIsHovered.
 
 - Two props always go together: value (what to display, from state) and onChange (updates the state).
 
-```javascript
-const [name, setName] = useState('');
-
-function handleNameChange(event) {
-  // event.target.value is the text currently in the box
-  setName(event.target.value);
-}
-
-<input value={name} onChange={handleNameChange} placeholder="Name" />;
-```
+    ```javascript
+    const [name, setName] = useState('');
+    
+    function handleNameChange(event) {
+      // event.target.value is the text currently in the box
+      setName(event.target.value);
+    }
+    
+    <input value={name} onChange={handleNameChange} placeholder="Name" />;
+    ```
 
 - Flow on every keystroke: type → onChange runs → setter updates state → React redraws → the input shows the new value.
 
@@ -216,6 +218,7 @@ function handleNameChange(event) {
 - Because React knows the text, you can use it anywhere (live previews, character counts like name.length).
 
 - Start text state as "" (not undefined) so the input is controlled from the first render.
+  
 
 ## Input values are always strings
 
@@ -224,11 +227,13 @@ function handleNameChange(event) {
 2. Convert when you calculate or save: Number(amount). For display, the string is fine.
 
 3. type="date" gives a string in YYYY-MM-DD format, the same format used for dates in the data.
+   
 
 ## Select (dropdown)
 
 select - is controlled the same way, with value and onChange. It shows the option whose value matches the state, so an empty first option (value="") is selected when the state is "".
 
+<<<<<<< HEAD
 ````javascript
 <select value={category} onChange=
   {handleCategoryChange}>
@@ -237,14 +242,28 @@ select - is controlled the same way, with value and onChange. It shows the optio
 </select
 ```>
 
+=======
+    ```javascript
+    <select value={category} onChange={handleCategoryChange}>
+      <option value="">Choose a category</option>
+      <option value="Food">Food</option>
+    </select>
+    ```
+>>>>>>> 107f348a466a0429dcc36baa7473ab6f2054be9a
 
 ## Submitting a form
 
 - Use a
 
+<<<<<<< HEAD
 ```javascript
   <form onSubmit={handleSubmit}> with a <button type="submit">
 ````
+=======
+    ```javascript
+      <form onSubmit={handleSubmit}> with a <button type="submit">
+    ```
+>>>>>>> 107f348a466a0429dcc36baa7473ab6f2054be9a
 
 Pressing Enter in an input submits it too.
 
@@ -268,6 +287,7 @@ Pressing Enter in an input submits it too.
 ```
 
 - Submitting doesn't change state by itself. The boxes keep their text until you reset the state.
+  
 
 ## Habits
 
@@ -284,15 +304,15 @@ Pressing Enter in an input submits it too.
 - React can't display an object directly ("Objects are not valid as a React child"). Reach inside it: {product.name}, {product.price}.
 - Attributes on built-in HTML elements (like <li>) don't become props. Only attributes on your own components do.
 
-```javascript
-{
-  products.map((product) => (
-    <li key={product.id}>
-      {product.name}: ${product.price}
-    </li>
-  ));
-}
-```
+    ```javascript
+    {
+      products.map((product) => (
+        <li key={product.id}>
+          {product.name}: ${product.price}
+        </li>
+      ));
+    }
+    ```
 
 ## Keys
 
@@ -305,26 +325,27 @@ Pressing Enter in an input submits it too.
 
 - State arrays are replaced with a new array, never changed in place.
 
-```javascript
-const [products, setProducts] = useState([
-  { id: 1, name: 'Bread', price: 10 },
-  { id: 2, name: 'Milk', price: 20 },
-]);
+    ```javascript
+    const [products, setProducts] = useState([
+      { id: 1, name: 'Bread', price: 10 },
+      { id: 2, name: 'Milk', price: 20 },
+    ]);
+    
+    // Remove: .filter() keeps every product whose id is NOT the one removed
+    function handleRemove(id) {
+      setProducts(products.filter((product) => product.id !== id));
+    }
+    
+    // Add: spread copies the old items into a new array, plus the new one.
+    // Never use products.push(...), which changes the old array.
+    function handleAdd() {
+      const newProduct = { id: Date.now(), name: name, price: Number(price) };
+      setProducts([...products, newProduct]);
+    }
+    ```
 
-// Remove: .filter() keeps every product whose id is NOT the one removed
-function handleRemove(id) {
-  setProducts(products.filter((product) => product.id !== id));
-}
 
-// Add: spread copies the old items into a new array, plus the new one.
-// Never use products.push(...), which changes the old array.
-function handleAdd() {
-  const newProduct = { id: Date.now(), name: name, price: Number(price) };
-  setProducts([...products, newProduct]);
-}
-```
-
-- A button that needs to pass a value needs an arrow function: onClick={() => handleRemove(product.id)}. Without it, handleRemove would run during rendering.
+- A button that needs to pass a value needs an arrow function: onClick={() => handleRemove(product.id)}. Without it, handleRemove  would run during rendering.
 - Convert input strings to numbers when building the object (Number(price)), or calculations will join text instead of adding.
 - Date.now() gives a unique id for new items for now (a database will generate ids later).
 
@@ -332,10 +353,11 @@ function handleAdd() {
 
 If a value can be calculated from state, calculate it in the component body. It's recomputed on every render, so it can't get out of sync.
 
-```javascript
-// scores.reduce((runningTotal, item) => runningTotal + item.value, startingValue)
-const totalPrice = products.reduce((sum, product) => sum + product.price, 0);
-```
+    ```javascript
+    // scores.reduce((runningTotal, item) => runningTotal + item.value, startingValue)
+    const totalPrice = products.reduce((sum, product) => sum + product.price, 0);
+    ```
+
 
 ### Why re-rendering makes this work
 
@@ -359,6 +381,7 @@ Conditional rendering means the JSX changes depending on state or props. React h
 - **`&&`:** Show something only when a condition is true.
 - **Early `return`:** Exit the component early and return different content.
 
+<<<<<<< HEAD
   ```javascript
   // Two outcomes: ternary
   {
@@ -380,6 +403,29 @@ Conditional rendering means the JSX changes depending on state or props. React h
     );
   }
   ```
+=======
+      ```
+      // Two outcomes: ternary
+      {
+        messages.length === 0 ? (
+          <p>You have no messages</p>
+        ) : (
+          <p>You have {messages.length} messages</p>
+        );
+      }
+    
+      // One outcome (show or nothing): &&
+      {
+        isOpen && (
+          <ul>
+            {messages.map((message) => (
+              <li key={message.id}>{message.text}</li>
+            ))}
+          </ul>
+        );
+      }
+      ```
+>>>>>>> 107f348a466a0429dcc36baa7473ab6f2054be9a
 
 - {} only accepts expressions, so if statements can't go directly inside JSX. A ternary and && are expressions. An if goes above the return (an early return).
   && is a gate: only what's directly to its right - appears and disappears. Whatever should be hidden (the whole <ul>, with its .map() inside) has to be behind it.
@@ -421,62 +467,64 @@ function handleClearAll() {
 - When you rename a function, rename every place that uses it. A leftover old name crashes the page (... is not defined).
 - Handlers that toggle a boolean are just setValue(!value), with no if needed.
 
-# Lifting State Up
+# 8. Lifting State Up
 
 ### The problem
 
 Data flows down in React: a parent passes data to a child through props. A child can't change its parent's state, and two sibling components can't see each other. So how does a form add something to a list that lives somewhere else?
 
-The solution
+#### The solution
 
 1. Keep the state in the parent that sits above everything that needs it. Here, both the form (to add) and the list (to show) need notes, so NotesApp owns it.
 2. The parent writes the function that changes the state.
 3. The parent passes that function down to the child as a prop.
 4. The child calls the function with its data when something happens, which sends the data up.
+   
 
-```javascript
-// CHILD: receives a function as a prop and calls it with the data
-function NoteForm({ onAddNote }) {
-  const [text, setText] = useState('');
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    onAddNote(text); // data travels UP
-    setText('');
-  }
-  // ...controlled input and submit button
-}
-
-// CHILD: only displays what it's given
-function NoteList({ notes }) {
-  return (
-    <ul>
-      {notes.map((note) => (
-        <li key={note.id}>{note.text}</li>
-      ))}
-    </ul>
-  );
-}
-
-// PARENT: owns the state and the function that changes it
-function NotesApp() {
-  const [notes, setNotes] = useState([{ id: 1, text: 'First note' }]);
-
-  function handleAddNote(text) {
-    const newNote = { id: Date.now(), text: text };
-    setNotes([...notes, newNote]);
-  }
-
-  return (
-    <div>
-      {/* the function goes DOWN (no parentheses) */}
-      <NoteForm onAddNote={handleAddNote} />
-      {/* the data goes DOWN */}
-      <NoteList notes={notes} />
-    </div>
-  );
-}
-```
+    ```javascript
+    // CHILD: receives a function as a prop and calls it with the data
+    function NoteForm({ onAddNote }) {
+      const [text, setText] = useState('');
+    
+      function handleSubmit(event) {
+        event.preventDefault();
+        onAddNote(text); // data travels UP
+        setText('');
+      }
+      // ...controlled input and submit button
+    }
+    
+    // CHILD: only displays what it's given
+    function NoteList({ notes }) {
+      return (
+        <ul>
+          {notes.map((note) => (
+            <li key={note.id}>{note.text}</li>
+          ))}
+        </ul>
+      );
+    }
+    
+    // PARENT: owns the state and the function that changes it
+    function NotesApp() {
+      const [notes, setNotes] = useState([{ id: 1, text: 'First note' }]);
+    
+      function handleAddNote(text) {
+        const newNote = { id: Date.now(), text: text };
+        setNotes([...notes, newNote]);
+      }
+    
+      return (
+        <div>
+          {/* the function goes DOWN (no parentheses) */}
+          <NoteForm onAddNote={handleAddNote} />
+          {/* the data goes DOWN */}
+          <NoteList notes={notes} />
+        </div>
+      );
+    }
+    ```
+    
 
 #### Up and down follow the component tree
 
