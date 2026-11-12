@@ -516,11 +516,11 @@ If you write this code directly in the component, it runs again on every redraw.
 useEffect takes two things: a function (the code to run) and an array (when to run it).
 
 ```markdown
-import { useEffect } from "react";
-
-useEffect(() => {
-document.title = "Count: " + count; // the extra job goes INSIDE the function
-}, [count]); // the array decides WHEN it runs
+    import { useEffect } from "react";
+    
+    useEffect(() => {
+        document.title = "Count: " + count; // the extra job goes INSIDE the function
+    }, [count]); // the array decides WHEN it runs
 ```
 
 #### The array decides when it runs
@@ -542,17 +542,17 @@ document.title = "Count: " + count; // the extra job goes INSIDE the function
 Some effects start something that keeps running, like a timer. Return a function from the effect, and React runs it when the component leaves the screen. Think of a tap: the effect turns it on, and the cleanup turns it off.
 
 ```markdown
-useEffect(() => {
-// Start a timer that runs every 1000 ms (1 second)
-const id = setInterval(() => {
-setSeconds((s) => s + 1); // use this form inside timers
-}, 1000);
-
-// Cleanup: stop the timer when the component goes away
-return () => {
-clearInterval(id);
-};
-}, []);
+    useEffect(() => {
+        // Start a timer that runs every 1000 ms (1 second)
+        const id = setInterval(() => {
+        setSeconds((s) => s + 1); // use this form inside timers
+    }, 1000);
+    
+    // Cleanup: stop the timer when the component goes away
+    return () => {
+        clearInterval(id);
+        };
+    }, []);
 ```
 
 Without the cleanup, the timer keeps running in the background after the component is hidden.
