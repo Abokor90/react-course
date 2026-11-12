@@ -360,16 +360,18 @@ Conditional rendering means the JSX changes depending on state or props. React h
   ```markdown
   // Two outcomes: ternary
   {
-      messages.length === 0 ? (
-      <p>You have no messages</p>
+  messages.length === 0 ? (
+
+  <p>You have no messages</p>
   ) : (
-      <p>You have {messages.length} messages</p>
-      );
+  <p>You have {messages.length} messages</p>
+  );
   }
 
   // One outcome (show or nothing): &&
   {
-      isOpen && (
+  isOpen && (
+
   <ul>
       {messages.map((message) => (
           <li key={message.id}>{message.text}</li>
@@ -390,12 +392,12 @@ Conditional rendering means the JSX changes depending on state or props. React h
 ```markdown
 // BUG: when the array is empty, [].length is 0, and "0" appears on the page
 {
-    messages.length && <button>Clear all</button>;
+messages.length && <button>Clear all</button>;
 }
 
 // SAFE: a comparison always gives a real true or false
 {
-    messages.length > 0 && <button>Clear all</button>;
+messages.length > 0 && <button>Clear all</button>;
 }
 ```
 
@@ -409,7 +411,7 @@ Clearing everything doesn't need .filter() or an id. Give the setter an empty ar
     function handleClearAll() {
         setMessages([]);
     }
-    
+
     // No value to pass, so pass the function itself (no parentheses, no arrow)
     <button onClick={handleClearAll}>Clear all</button>;
 ```
@@ -496,3 +498,67 @@ The full path of a new note: typed in NoteForm → onAddNote(text) (up) → hand
 - The component that owns the list creates the ids, because it's the only one that can see every item.
 - Spread works on arrays ([...notes, newNote]) and on objects ({ ...expense }).
 - A function is not a component. Never write <handleAddNote />.
+
+# 9. useEffect
+
+### What is it for?
+
+A component's main job is to show things on the screen. Sometimes it also needs to do an extra job outside the screen. These extra jobs are called side effects. Examples:
+
+- Getting data from a server when the page opens.
+- Changing the title in the browser tab.
+- Starting a timer.
+
+If you write this code directly in the component, it runs again on every redraw. useEffect lets you run it after the screen is drawn, and only when you say.
+
+### How it looks
+
+useEffect takes two things: a function (the code to run) and an array (when to run it).
+
+```markdown
+import { useEffect } from "react";
+
+useEffect(() => {
+document.title = "Count: " + count; // the extra job goes INSIDE the function
+}, [count]); // the array decides WHEN it runs
+```
+
+#### The array decides when it runs
+
+| Dependency Array | When the Code Runs                                                        |
+| ---------------- | ------------------------------------------------------------------------- |
+| `[]` (empty)     | **One time**, when the component first appears (mounts).                  |
+| `[count]`        | When the component first appears, **and again whenever `count` changes**. |
+| No array         | **After every render** (rarely what you want).                            |
+
+- "Appears" and "redraws" are different. A component appears once. It can redraw many times (every state change). [] cares only about the first appearance.
+- Put every value the effect uses inside the array.
+- In development, React runs an effect twice on page load as a safety check. This is normal and does not happen in the finished app.
+- Don't put the extra job directly in the component body. Put it inside an effect.
+- Show a number, not a whole list, in text: use expenses.length, not expenses (a list of objects turns into [object Object]).
+
+### Cleaning up
+
+Some effects start something that keeps running, like a timer. Return a function from the effect, and React runs it when the component leaves the screen. Think of a tap: the effect turns it on, and the cleanup turns it off.
+
+```markdown
+useEffect(() => {
+// Start a timer that runs every 1000 ms (1 second)
+const id = setInterval(() => {
+setSeconds((s) => s + 1); // use this form inside timers
+}, 1000);
+
+// Cleanup: stop the timer when the component goes away
+return () => {
+clearInterval(id);
+};
+}, []);
+```
+
+Without the cleanup, the timer keeps running in the background after the component is hidden.
+
+### Reminders
+
+- Inside a timer, use setSeconds((s) => s + 1) so you always add to the latest value.
+- A gate such as {showTimer && <Timer />} controls only what is directly to its right.
+- A button label should say what clicking will do ("Hide" when the thing is visible).

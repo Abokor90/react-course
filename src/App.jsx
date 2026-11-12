@@ -1,9 +1,14 @@
-import NotesApp from "./09-lifting/practice/NotesApp";
+import { useState } from "react";
+import Timer from "./10-effects/practice/Timer";
 
 function App() {
+  const [showTimer, setShowTimer] = useState(true);
+
+
   return (
     <div>
-      <NotesApp />
+      <button onClick={() => setShowTimer(!showTimer)}>{showTimer ? "Hide" : "Show"}</button>
+      {showTimer && <Timer />}
     </div>
   );
 }
