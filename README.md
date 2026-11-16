@@ -33,8 +33,8 @@ The exercises live here. The concepts are then applied in my main project, the *
 | 5   | Forms + controlled inputs                 | Essential         | Done   |
 | 6   | Lists + keys                              | Essential         | Done   |
 | 7   | Conditional rendering                     | Essential         | Done   |
-| 8   | Lifting state up + component organization | Essential         |        |
-| 9   | `useEffect`                               | Essential         |        |
+| 8   | Lifting state up + component organization | Essential         | Done   |
+| 9   | `useEffect`                               | Essential         | Done   |
 | 10  | Data fetching + loading/error states      | Essential         |        |
 | 11  | React Router                              | Essential         |        |
 | 12  | `useRef`, derived state                   | Useful            |        |
